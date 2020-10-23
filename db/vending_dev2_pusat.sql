@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Waktu pembuatan: 23 Okt 2020 pada 18.04
--- Versi server: 5.6.49
--- Versi PHP: 7.3.6
+-- Host: 127.0.0.1
+-- Generation Time: Oct 23, 2020 at 01:41 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `biruid_dev2_pusat`
+-- Database: `vending_dev2_pusat`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admins`
+-- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
@@ -42,7 +42,7 @@ CREATE TABLE `admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `admins`
+-- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `email`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
@@ -56,7 +56,7 @@ INSERT INTO `admins` (`id`, `email`, `username`, `auth_key`, `password_hash`, `p
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `auth_assignment`
+-- Table structure for table `auth_assignment`
 --
 
 CREATE TABLE `auth_assignment` (
@@ -66,7 +66,7 @@ CREATE TABLE `auth_assignment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `auth_assignment`
+-- Dumping data for table `auth_assignment`
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
@@ -77,7 +77,7 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `auth_item`
+-- Table structure for table `auth_item`
 --
 
 CREATE TABLE `auth_item` (
@@ -91,7 +91,7 @@ CREATE TABLE `auth_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `auth_item`
+-- Dumping data for table `auth_item`
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
@@ -181,7 +181,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `auth_item_child`
+-- Table structure for table `auth_item_child`
 --
 
 CREATE TABLE `auth_item_child` (
@@ -190,10 +190,16 @@ CREATE TABLE `auth_item_child` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `auth_item_child`
+-- Dumping data for table `auth_item_child`
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('customer', 'customer access'),
+('customer access', '/site/error'),
+('customer access', '/site/index'),
+('customer access', '/site/login'),
+('customer access', '/site/logout'),
+('owner', 'owner access'),
 ('owner access', '/admin/*'),
 ('owner access', '/admin/assignment/*'),
 ('owner access', '/admin/assignment/assign'),
@@ -267,22 +273,16 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('owner access', '/site/*'),
 ('owner access', '/site/captcha'),
 ('owner access', '/site/contact'),
-('customer access', '/site/error'),
 ('owner access', '/site/error'),
-('customer access', '/site/index'),
 ('owner access', '/site/index'),
-('customer access', '/site/login'),
 ('owner access', '/site/login'),
-('customer access', '/site/logout'),
 ('owner access', '/site/logout'),
-('owner access', '/site/signup'),
-('customer', 'customer access'),
-('owner', 'owner access');
+('owner access', '/site/signup');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `auth_rule`
+-- Table structure for table `auth_rule`
 --
 
 CREATE TABLE `auth_rule` (
@@ -295,7 +295,7 @@ CREATE TABLE `auth_rule` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `catridges`
+-- Table structure for table `catridges`
 --
 
 CREATE TABLE `catridges` (
@@ -307,7 +307,7 @@ CREATE TABLE `catridges` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `catridges`
+-- Dumping data for table `catridges`
 --
 
 INSERT INTO `catridges` (`id`, `id_mtr_type`, `code`, `status`, `id_machine`) VALUES
@@ -330,7 +330,7 @@ INSERT INTO `catridges` (`id`, `id_mtr_type`, `code`, `status`, `id_machine`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `catridge_history`
+-- Table structure for table `catridge_history`
 --
 
 CREATE TABLE `catridge_history` (
@@ -345,7 +345,7 @@ CREATE TABLE `catridge_history` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `catridge_status`
+-- Table structure for table `catridge_status`
 --
 
 CREATE TABLE `catridge_status` (
@@ -357,7 +357,7 @@ CREATE TABLE `catridge_status` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `machine`
+-- Table structure for table `machine`
 --
 
 CREATE TABLE `machine` (
@@ -368,7 +368,7 @@ CREATE TABLE `machine` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `machine`
+-- Dumping data for table `machine`
 --
 
 INSERT INTO `machine` (`machine_code`, `pos_id`, `store_id`, `user_id`) VALUES
@@ -381,7 +381,7 @@ INSERT INTO `machine` (`machine_code`, `pos_id`, `store_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `machine_rent`
+-- Table structure for table `machine_rent`
 --
 
 CREATE TABLE `machine_rent` (
@@ -395,7 +395,7 @@ CREATE TABLE `machine_rent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `machine_rent`
+-- Dumping data for table `machine_rent`
 --
 
 INSERT INTO `machine_rent` (`id`, `id_machine`, `id_customer`, `created_at`, `rent_start`, `rent_end`, `status`) VALUES
@@ -404,7 +404,7 @@ INSERT INTO `machine_rent` (`id`, `id_machine`, `id_customer`, `created_at`, `re
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `machine_status`
+-- Table structure for table `machine_status`
 --
 
 CREATE TABLE `machine_status` (
@@ -422,7 +422,7 @@ CREATE TABLE `machine_status` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `materials`
+-- Table structure for table `materials`
 --
 
 CREATE TABLE `materials` (
@@ -443,7 +443,7 @@ CREATE TABLE `materials` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `materials`
+-- Dumping data for table `materials`
 --
 
 INSERT INTO `materials` (`id`, `id_machine`, `id_mtr_type`, `id_product`, `material`, `is_topping`, `price`, `icon`, `stock`, `init_stock`, `parstock`, `usages`, `code`, `status`) VALUES
@@ -469,7 +469,7 @@ INSERT INTO `materials` (`id`, `id_machine`, `id_mtr_type`, `id_product`, `mater
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `material_history`
+-- Table structure for table `material_history`
 --
 
 CREATE TABLE `material_history` (
@@ -484,7 +484,7 @@ CREATE TABLE `material_history` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `material_type`
+-- Table structure for table `material_type`
 --
 
 CREATE TABLE `material_type` (
@@ -493,7 +493,7 @@ CREATE TABLE `material_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `material_type`
+-- Dumping data for table `material_type`
 --
 
 INSERT INTO `material_type` (`id`, `name`) VALUES
@@ -514,7 +514,7 @@ INSERT INTO `material_type` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menu`
+-- Table structure for table `menu`
 --
 
 CREATE TABLE `menu` (
@@ -527,7 +527,7 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `menu`
+-- Dumping data for table `menu`
 --
 
 INSERT INTO `menu` (`id`, `name`, `parent`, `route`, `order`, `data`) VALUES
@@ -543,7 +543,7 @@ INSERT INTO `menu` (`id`, `name`, `parent`, `route`, `order`, `data`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -556,7 +556,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`id`, `id_category`, `product`, `image`, `sort`, `status`) VALUES
@@ -571,7 +571,7 @@ INSERT INTO `product` (`id`, `id_category`, `product`, `image`, `sort`, `status`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `product_category`
+-- Table structure for table `product_category`
 --
 
 CREATE TABLE `product_category` (
@@ -582,7 +582,7 @@ CREATE TABLE `product_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `product_category`
+-- Dumping data for table `product_category`
 --
 
 INSERT INTO `product_category` (`id`, `category`, `method`, `status`) VALUES
@@ -592,7 +592,7 @@ INSERT INTO `product_category` (`id`, `category`, `method`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `product_detail`
+-- Table structure for table `product_detail`
 --
 
 CREATE TABLE `product_detail` (
@@ -606,7 +606,7 @@ CREATE TABLE `product_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `product_detail`
+-- Dumping data for table `product_detail`
 --
 
 INSERT INTO `product_detail` (`id`, `id_product`, `name`, `code`, `price`, `selling_price`, `status`) VALUES
@@ -681,7 +681,42 @@ INSERT INTO `product_detail` (`id`, `id_product`, `name`, `code`, `price`, `sell
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `spice_level`
+-- Table structure for table `rajabiller`
+--
+
+CREATE TABLE `rajabiller` (
+  `id_transaksi` varchar(50) NOT NULL,
+  `time_request` varchar(50) DEFAULT NULL,
+  `id_produk` varchar(50) DEFAULT NULL,
+  `nama_produk` varchar(50) DEFAULT NULL,
+  `id_pelanggan` varchar(50) DEFAULT NULL,
+  `nominal` int(11) DEFAULT NULL,
+  `total_bayar` int(11) DEFAULT NULL,
+  `sn` varchar(50) DEFAULT NULL,
+  `reff` varchar(50) DEFAULT NULL,
+  `response_code` varchar(50) DEFAULT NULL,
+  `keterangan` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rajabiller`
+--
+
+INSERT INTO `rajabiller` (`id_transaksi`, `time_request`, `id_produk`, `nama_produk`, `id_pelanggan`, `nominal`, `total_bayar`, `sn`, `reff`, `response_code`, `keterangan`) VALUES
+('10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('504', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('505', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('510', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('6', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS'),
+('8', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'SUCCESS');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `spice_level`
 --
 
 CREATE TABLE `spice_level` (
@@ -693,7 +728,7 @@ CREATE TABLE `spice_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `spice_level`
+-- Dumping data for table `spice_level`
 --
 
 INSERT INTO `spice_level` (`id`, `level`, `usage`, `price`, `status`) VALUES
@@ -707,7 +742,7 @@ INSERT INTO `spice_level` (`id`, `level`, `usage`, `price`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbltransaksi`
+-- Table structure for table `tbltransaksi`
 --
 
 CREATE TABLE `tbltransaksi` (
@@ -729,7 +764,7 @@ CREATE TABLE `tbltransaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbltransaksi`
+-- Dumping data for table `tbltransaksi`
 --
 
 INSERT INTO `tbltransaksi` (`id`, `storeid`, `posid`, `trxno`, `reffno`, `amount`, `trxdt`, `pymstt`, `pymreff`, `pymdt`, `issuerid`, `retreffno`, `payernm`, `payerphn`, `status`) VALUES
@@ -1236,12 +1271,18 @@ INSERT INTO `tbltransaksi` (`id`, `storeid`, `posid`, `trxno`, `reffno`, `amount
 (500, 'ID2020081400027', 'A05', 'AA0052010184010', 'AA0052010183708', 28000, '2020-10-04 11:20:14', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
 (501, 'ID2020081400027', 'A05', 'AA0052010197192', 'AA0052010199723', 51000, '2020-10-11 01:49:06', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
 (503, 'ID2020081400023', 'A01', 'AA0012010219033', 'AA0012010219033', 22000, '2020-10-21 18:22:01', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
-(506, 'ID2020081400023', 'A01', 'AA0012010229034', 'AA0012010229034', 17000, '2020-10-22 15:20:41', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1');
+(506, 'ID2020081400023', 'A01', 'AA0012010229034', 'AA0012010229034', 17000, '2020-10-22 15:20:41', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
+(507, 'ID2020081400023', 'A01', 'AA0012010239035', 'AA0012010239035', 14000, '2020-10-23 18:15:25', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
+(508, 'ID2020081400023', 'A01', 'AA0012010239036', 'AA0012010239036', 10000, '2020-10-23 18:16:08', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
+(509, 'ID2020081400023', 'A01', 'AA0012010239037', 'AA0012010239037', 10000, '2020-10-23 18:17:16', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
+(510, 'ID2020081400023', 'A01', 'AA0012010239038', 'AA0012010239038', 32000, '2020-10-23 18:37:37', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
+(511, 'ID2020081400023', 'A01', '0001', '0001', 0, '2020-10-23 18:38:23', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1'),
+(512, 'ID2020081400023', 'A01', 'AA0012010239039', 'AA0012010239039', 32000, '2020-10-23 18:40:56', 'PAID', '', '0000-00-00 00:00:00', '', '', '', '', '1');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaction_detail`
+-- Table structure for table `transaction_detail`
 --
 
 CREATE TABLE `transaction_detail` (
@@ -1259,7 +1300,7 @@ CREATE TABLE `transaction_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `transaction_detail`
+-- Dumping data for table `transaction_detail`
 --
 
 INSERT INTO `transaction_detail` (`id`, `no_trx_master`, `id_prd_detail`, `topping`, `spice`, `price`, `no_trx_ppob`, `customer_id`, `position`, `type`, `status`) VALUES
@@ -2012,7 +2053,7 @@ INSERT INTO `transaction_detail` (`id`, `no_trx_master`, `id_prd_detail`, `toppi
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaction_master`
+-- Table structure for table `transaction_master`
 --
 
 CREATE TABLE `transaction_master` (
@@ -2027,7 +2068,7 @@ CREATE TABLE `transaction_master` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `transaction_master`
+-- Dumping data for table `transaction_master`
 --
 
 INSERT INTO `transaction_master` (`id`, `no_trx`, `created_at`, `name`, `total_price`, `type`, `status`, `flag`) VALUES
@@ -2538,7 +2579,7 @@ INSERT INTO `transaction_master` (`id`, `no_trx`, `created_at`, `name`, `total_p
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaction_out`
+-- Table structure for table `transaction_out`
 --
 
 CREATE TABLE `transaction_out` (
@@ -2555,20 +2596,20 @@ CREATE TABLE `transaction_out` (
 --
 
 --
--- Indeks untuk tabel `admins`
+-- Indexes for table `admins`
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `auth_assignment`
+-- Indexes for table `auth_assignment`
 --
 ALTER TABLE `auth_assignment`
   ADD PRIMARY KEY (`item_name`,`user_id`),
   ADD KEY `idx-auth_assignment-user_id` (`user_id`);
 
 --
--- Indeks untuk tabel `auth_item`
+-- Indexes for table `auth_item`
 --
 ALTER TABLE `auth_item`
   ADD PRIMARY KEY (`name`),
@@ -2576,236 +2617,242 @@ ALTER TABLE `auth_item`
   ADD KEY `idx-auth_item-type` (`type`);
 
 --
--- Indeks untuk tabel `auth_item_child`
+-- Indexes for table `auth_item_child`
 --
 ALTER TABLE `auth_item_child`
   ADD PRIMARY KEY (`parent`,`child`),
   ADD KEY `child` (`child`);
 
 --
--- Indeks untuk tabel `auth_rule`
+-- Indexes for table `auth_rule`
 --
 ALTER TABLE `auth_rule`
   ADD PRIMARY KEY (`name`);
 
 --
--- Indeks untuk tabel `catridges`
+-- Indexes for table `catridges`
 --
 ALTER TABLE `catridges`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `catridge_history`
+-- Indexes for table `catridge_history`
 --
 ALTER TABLE `catridge_history`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `catridge_status`
+-- Indexes for table `catridge_status`
 --
 ALTER TABLE `catridge_status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `machine`
+-- Indexes for table `machine`
 --
 ALTER TABLE `machine`
   ADD PRIMARY KEY (`machine_code`);
 
 --
--- Indeks untuk tabel `machine_rent`
+-- Indexes for table `machine_rent`
 --
 ALTER TABLE `machine_rent`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `machine_status`
+-- Indexes for table `machine_status`
 --
 ALTER TABLE `machine_status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `materials`
+-- Indexes for table `materials`
 --
 ALTER TABLE `materials`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `material_history`
+-- Indexes for table `material_history`
 --
 ALTER TABLE `material_history`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `material_type`
+-- Indexes for table `material_type`
 --
 ALTER TABLE `material_type`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `menu`
+-- Indexes for table `menu`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent` (`parent`);
 
 --
--- Indeks untuk tabel `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `product_category`
+-- Indexes for table `product_category`
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `product_detail`
+-- Indexes for table `product_detail`
 --
 ALTER TABLE `product_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `spice_level`
+-- Indexes for table `rajabiller`
+--
+ALTER TABLE `rajabiller`
+  ADD PRIMARY KEY (`id_transaksi`);
+
+--
+-- Indexes for table `spice_level`
 --
 ALTER TABLE `spice_level`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tbltransaksi`
+-- Indexes for table `tbltransaksi`
 --
 ALTER TABLE `tbltransaksi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transaction_detail`
+-- Indexes for table `transaction_detail`
 --
 ALTER TABLE `transaction_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transaction_master`
+-- Indexes for table `transaction_master`
 --
 ALTER TABLE `transaction_master`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `no_trx_unique` (`no_trx`);
 
 --
--- Indeks untuk tabel `transaction_out`
+-- Indexes for table `transaction_out`
 --
 ALTER TABLE `transaction_out`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admins`
+-- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT untuk tabel `catridges`
+-- AUTO_INCREMENT for table `catridges`
 --
 ALTER TABLE `catridges`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `catridge_history`
+-- AUTO_INCREMENT for table `catridge_history`
 --
 ALTER TABLE `catridge_history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `catridge_status`
+-- AUTO_INCREMENT for table `catridge_status`
 --
 ALTER TABLE `catridge_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `machine_rent`
+-- AUTO_INCREMENT for table `machine_rent`
 --
 ALTER TABLE `machine_rent`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `machine_status`
+-- AUTO_INCREMENT for table `machine_status`
 --
 ALTER TABLE `machine_status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `materials`
+-- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `material_history`
+-- AUTO_INCREMENT for table `material_history`
 --
 ALTER TABLE `material_history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `material_type`
+-- AUTO_INCREMENT for table `material_type`
 --
 ALTER TABLE `material_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `menu`
+-- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `product`
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `product_category`
+-- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `product_detail`
+-- AUTO_INCREMENT for table `product_detail`
 --
 ALTER TABLE `product_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
--- AUTO_INCREMENT untuk tabel `spice_level`
+-- AUTO_INCREMENT for table `spice_level`
 --
 ALTER TABLE `spice_level`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `tbltransaksi`
+-- AUTO_INCREMENT for table `tbltransaksi`
 --
 ALTER TABLE `tbltransaksi`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=507;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=513;
 
 --
--- AUTO_INCREMENT untuk tabel `transaction_detail`
+-- AUTO_INCREMENT for table `transaction_detail`
 --
 ALTER TABLE `transaction_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=747;
 
 --
--- AUTO_INCREMENT untuk tabel `transaction_master`
+-- AUTO_INCREMENT for table `transaction_master`
 --
 ALTER TABLE `transaction_master`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
 
 --
--- AUTO_INCREMENT untuk tabel `transaction_out`
+-- AUTO_INCREMENT for table `transaction_out`
 --
 ALTER TABLE `transaction_out`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
