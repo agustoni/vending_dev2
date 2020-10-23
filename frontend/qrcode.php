@@ -42,7 +42,7 @@
 
         $rs = $contrx->query($sq);
 
-        $tempdir = "/frontend/temp/"; //Nama folder tempat menyimpan file qrcode
+        $tempdir = "temp/"; //Nama folder tempat menyimpan file qrcode
         $namaFile= "test_qr.png";
 
         $datatest = (object) array(

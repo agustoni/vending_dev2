@@ -9,9 +9,9 @@
        
         function local() {
             $this->servername = "localhost";
-            $this->username = "biruid_vm";
-            $this->password = "vendingmachine";
-            $this->database = "biruid_dev2";
+            $this->username = "root";
+            $this->password = "";
+            $this->database = "vending_dev2";
 
             return [$this->servername, $this->username, $this->password, $this->database];
         }
@@ -23,9 +23,9 @@
             // $this->database = "velasquez_romiero";
 
             $this->servername = "localhost";
-            $this->username = "biruid_vm";
-            $this->password = "vendingmachine";
-            $this->database = "biruid_dev2_pusat";
+            $this->username = "root";
+            $this->password = "";
+            $this->database = "vending_dev2_pusat";
 
             return [$this->servername, $this->username, $this->password, $this->database];
         }
